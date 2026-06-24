@@ -16,6 +16,10 @@ This first iteration ships the two foundations you asked for:
    end. A fully worked `thrusters` component is included as the template for
    adding real subsystems.
 
+> **New here?** Read the [User Guide](docs/USER_GUIDE.md) — it documents every
+> config option and CLI command, and walks through the hardware interface end
+> to end.
+
 ---
 
 ## Layout
