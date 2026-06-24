@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# SPYOT generated artifacts
+runconfig.json
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store

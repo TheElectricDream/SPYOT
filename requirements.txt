@@ -1,0 +1,3 @@
+# SPYOT *software* dependencies (installed into the project venv on every host).
+# Keep this minimal; the heartbeat demo needs nothing here.
+numpy>=1.24        # used by the thruster simulation model

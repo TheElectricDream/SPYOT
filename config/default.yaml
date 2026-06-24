@@ -1,0 +1,68 @@
+# SPYOT default configuration.
+# Edit this file (or copy it with `python manager.py init --config my.yaml`).
+
+# ----------------------------------------------------------------------------
+# Environment
+# ----------------------------------------------------------------------------
+python_version: "3.11"        # required Python major.minor for the venv
+venv_dir: ".venv"             # venv location, relative to the project root
+requirements: "requirements.txt"
+
+# ----------------------------------------------------------------------------
+# Execution
+# ----------------------------------------------------------------------------
+mode: "simulation"            # "simulation" or "experiment"
+sample_rate_hz: 10.0          # loop rate (Hz) - must be precise
+duration_s: 10.0              # run length in seconds (null = run forever)
+message: "SPYOT tick"         # text printed by the heartbeat component
+
+# The spacecraft is a list of components. For the first iteration we run a
+# single heartbeat that prints a synchronized message every tick. Add more
+# components (e.g. the thruster system) by appending to this list.
+components:
+  - name: heartbeat
+    type: heartbeat
+    params:
+      message: "hello from SPYOT"
+      every: 1                # print every Nth tick
+
+  # Example of the thruster template (disabled by default). Uncomment to use.
+  # - name: thrusters
+  #   type: thrusters
+  #   params:
+  #     max_thrust: 0.25      # N per solenoid
+  #     min_duty: 0.05
+  #     tau_open_s: 0.010     # solenoid open time constant
+  #     tau_close_s: 0.015    # solenoid close time constant
+  #     mass: 12.0            # kg (simulation only)
+  #     inertia: 0.20         # kg m^2, Izz (simulation only)
+  #     teensy_port: "/dev/ttyACM0"   # experiment mode only
+
+# ----------------------------------------------------------------------------
+# Deployment / synchronization
+# ----------------------------------------------------------------------------
+remote_root: "~/spyot"        # where the software is deployed on each host
+
+sync:
+  lead_time_s: 5.0            # head start given to all instances before tick 0
+  offset_samples: 15          # clock-offset handshakes per host
+  spin_window_s: 0.0015       # busy-wait window for precise tick timing
+
+# The remote spacecraft computers. NOTE: the SSH *username* was not specified;
+# set `user` for each host to the real login account on the rigs.
+hosts:
+  - name: spot-red
+    ip: "192.168.1.110"
+    user: "spot"
+    password: "srcl2023"
+    python: "python3"
+  - name: spot-black
+    ip: "192.168.1.111"
+    user: "spot"
+    password: "srcl2023"
+    python: "python3"
+  - name: spot-blue
+    ip: "192.168.1.112"
+    user: "spot"
+    password: "srcl2023"
+    python: "python3"

@@ -1,0 +1,5 @@
+# SPYOT *manager* dependencies (only needed on the controller machine, and
+# only for remote/deploy/sync operations + reading YAML configs).
+# Local `env`/`run` work with the standard library alone.
+pyyaml>=6.0        # read the human-friendly YAML config
+paramiko>=3.0      # cross-platform SSH/SFTP for deploy + sync
